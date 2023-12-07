@@ -15,26 +15,30 @@ def index():
 @app.route('/predict',methods=['POST'])
 def predict():
     print("Received POST request")
-    cap_shape = request.form.get('cap_shape')
-    cap_surface = request.form.get('cap_surface')
-    cap_color = request.form.get('cap_color')
-    bruises = request.form.get('bruises')
-    odor = request.form.get('odor')
-    gill_attachment = request.form.get('gill_attachment')
-    gill_spacing = request.form.get('gill_spacing')
-    gill_size = request.form.get('gill_size')
-    gill_color = request.form.get('gill_color')
-    stalk_shape = request.form.get('stalk_shape')
-    stalk_surface_above_ring = request.form.get('stalk_surface_above_ring')
-    stalk_surface_below_ring = request.form.get('stalk_surface_below_ring')
-    stalk_color_above_ring = request.form.get('stalk_color_above_ring')
-    stalk_color_below_ring = request.form.get('stalk_color_below_ring')
-    veil_color = request.form.get('veil_color')
-    ring_number = request.form.get('ring_number')
-    ring_type = request.form.get('ring_type')
-    spore_print_color = request.form.get('spore_print_color')
-    population = request.form.get('population')
-    habitat = request.form.get('habitat')
+    if request.is_json:
+        data = request.json
+    else:
+        data = dict(request.values)
+    cap_shape = data['cap_shape']
+    cap_surface = data['cap_surface']
+    cap_color = data['cap_color']
+    bruises = data['bruises']
+    odor = data['odor']
+    gill_attachment = data['gill_attachment']
+    gill_spacing = data['gill_spacing']
+    gill_size = data['gill_size']
+    gill_color = data['gill_color']
+    stalk_shape = data['stalk_shape']
+    stalk_surface_above_ring = data['stalk_surface_above_ring']
+    stalk_surface_below_ring = data['stalk_surface_below_ring']
+    stalk_color_above_ring = data['stalk_color_above_ring']
+    stalk_color_below_ring = data['stalk_color_below_ring']
+    veil_color = data['veil_color']
+    ring_number = data['ring_number']
+    ring_type = data['ring_type']
+    spore_print_color = data['spore_print_color']
+    population = data['population']
+    habitat = data['habitat']
     
     cap_shape_encoder = LabelEncoder()
     cap_shape_encoder.classes_ = np.load('cap_shape_encoder.npy', allow_pickle=True)
